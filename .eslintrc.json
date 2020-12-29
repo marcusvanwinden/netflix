@@ -12,7 +12,5 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": {
-    "import/no-extraneous-dependencies": { "devDependencies": true }
-  }
+  "rules": {}
 }
