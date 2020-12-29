@@ -1,0 +1,36 @@
+{
+  "name": "netflix",
+  "version": "1.0.0",
+  "description": "My Netflix clone.",
+  "repository": "https://github.com/marcusvanwinden/netflix",
+  "author": "Marcus van Winden <marcus.van.winden@icloud.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "webpack serve --open 'Google Chrome' --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^3.0.0",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0",
+    "webpack-dev-server": "^3.11.1",
+    "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
+  }
+}
