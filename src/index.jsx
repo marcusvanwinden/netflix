@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 function App() {
   return (
     <>
-      <h1>Netflix Test</h1>
+      <h1>Netflix IT WORKS!</h1>
     </>
   );
 }
