@@ -12,7 +12,7 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NETFLIX_A186B }}'
-          projectId: netflix-a186b
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARCUSVANWINDEN_NETFLIX }}'
+          projectId: marcusvanwinden-netflix
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
