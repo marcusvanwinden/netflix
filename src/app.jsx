@@ -15,7 +15,7 @@ export default function App() {
           <h1>I will be the browse page</h1>
         </Route>
         <Route path="/">
-          <h1>I am going to be a cloned Netflix application.</h1>
+          <h1>I am going to be a cloned Netflix application</h1>
         </Route>
       </Switch>
     </Router>
