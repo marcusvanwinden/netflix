@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
+  text-align: left;
 `;
 
 export const Row = styled.div`
