@@ -1,5 +1,5 @@
 import React from 'react';
-import Jumbotron from '../components/jumbotron';
+import { Jumbotron } from '../components';
 import jumboData from '../fixtures/jumbotrons.json';
 
 const jumboImages = require.context('../../images/jumbotrons/');
