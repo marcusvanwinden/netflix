@@ -1,11 +1,17 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, {
+  useState,
+  useContext,
+  createContext,
+  useRef,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import {
   Container,
-  Frame,
   Inner,
-  Item,
   Title,
+  Frame,
+  Item,
   Header,
   Body,
 } from './styles/accordion';
@@ -23,6 +29,11 @@ Accordion.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+Accordion.Title = ({ children }) => <Title>{children}</Title>;
+Accordion.Title.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 Accordion.Frame = ({ children }) => <Frame>{children}</Frame>;
 Accordion.Frame.propTypes = {
   children: PropTypes.node.isRequired,
@@ -37,11 +48,6 @@ Accordion.Item = ({ children }) => {
   );
 };
 Accordion.Item.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-Accordion.Title = ({ children }) => <Title>{children}</Title>;
-Accordion.Title.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
@@ -64,7 +70,24 @@ Accordion.Header.propTypes = {
 
 Accordion.Body = ({ children }) => {
   const { toggleShow } = useContext(ToggleContext);
-  return toggleShow ? <Body>{children}</Body> : null;
+  const [bodyHeight, setBodyHeight] = useState(null);
+  const bodyRef = useRef(null);
+
+  useEffect(() => setBodyHeight(bodyRef.current.scrollHeight));
+
+  useEffect(() => {
+    if (toggleShow) {
+      bodyRef.current.classList.add('active');
+    } else {
+      bodyRef.current.classList.remove('active');
+    }
+  });
+
+  return (
+    <Body ref={bodyRef} bodyHeight={bodyHeight}>
+      {children}
+    </Body>
+  );
 };
 Accordion.Body.propTypes = {
   children: PropTypes.node.isRequired,
