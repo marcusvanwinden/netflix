@@ -10,6 +10,9 @@
     "start": "webpack serve --open 'Google Chrome' --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
+  "resolutions": {
+    "styled-components": "^5"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
