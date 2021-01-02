@@ -9,7 +9,7 @@ export const Inner = styled.div`
   flex-direction: column;
   max-width: 825px;
   margin: 0 auto;
-  padding: 4.5em 2.5em;
+  padding: 4.5em 2em;
 `;
 
 export const Title = styled.h1`
@@ -69,8 +69,8 @@ export const Body = styled.div`
   max-height: 0;
   transition: all 300ms ease-in-out;
 
-  max-height: @media (max-width: 600px) {
-    font-size: 16px;
+  @media (max-width: 600px) {
+    font-size: 1rem;
   }
 
   &.active {
