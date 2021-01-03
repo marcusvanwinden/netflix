@@ -73,7 +73,7 @@ Accordion.Body = ({ children }) => {
   const [bodyHeight, setBodyHeight] = useState(null);
   const bodyRef = useRef(null);
 
-  useEffect(() => setBodyHeight(bodyRef.current.scrollHeight));
+  useEffect(() => setBodyHeight(bodyRef.current.scrollHeight), []);
 
   useEffect(() => {
     if (toggleShow) {
