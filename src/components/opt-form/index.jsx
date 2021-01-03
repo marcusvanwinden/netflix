@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import chevronRight from '../../../images/icons/chevron-right.png';
-import { Container, Input, Button, Text } from './styles/opt-form';
+import { Container, Input, Button, Text, Break } from './styles/opt-form';
 
 const OptForm = ({ children }) => <Container>{children}</Container>;
 OptForm.propTypes = {
@@ -27,5 +27,7 @@ OptForm.Text = ({ children }) => <Text>{children}</Text>;
 OptForm.Text.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+OptForm.Break = () => <Break />;
 
 export default OptForm;

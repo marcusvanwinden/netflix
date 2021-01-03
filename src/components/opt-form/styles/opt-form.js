@@ -26,8 +26,8 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   height: 70px;
-  background-color: #e50914;
-  color: #ffffff;
+  background: #e50914;
+  color: white;
   text-transform: uppercase;
   padding: 0 32px;
   font-size: 26px;
@@ -45,24 +45,29 @@ export const Button = styled.button`
   }
 
   &:hover {
-    background-color: #f40612;
+    background: #f40612;
   }
 
   @media (max-width: 1000px) {
     height: 50px;
-    font-size: 1rem;
+    font-size: 16px;
     margin-top: 20px;
     font-weight: bold;
   }
 `;
 
+export const Break = styled.div`
+  flex-basis: 100%;
+  height: 0;
+`;
+
 export const Text = styled.p`
   font-size: 19px;
-  color: #ffffff;
+  color: white;
   text-align: center;
 
   @media (max-width: 600px) {
-    font-size: 1rem;
+    font-size: 16px;
     line-height: 22px;
   }
 `;
