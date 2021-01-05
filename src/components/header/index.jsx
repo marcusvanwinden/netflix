@@ -4,7 +4,7 @@ import { Link as ReachRouterLink } from 'react-router-dom';
 import { Background, Container, Logo, ButtonLink } from './styles/header';
 
 const Header = ({ background = true, children }) =>
-  background ? <Background>{children}</Background> : { children };
+  background ? <Background>{children}</Background> : children;
 Header.propTypes = {
   children: PropTypes.node.isRequired,
   background: PropTypes.bool.isRequired,

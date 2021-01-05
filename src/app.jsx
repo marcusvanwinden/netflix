@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './pages/home';
+import { SignIn, SignUp, Browse, Home } from './pages';
 import * as ROUTES from './constants/routes';
 
 export default function App() {
@@ -8,13 +8,13 @@ export default function App() {
     <Router>
       <Switch>
         <Route path={ROUTES.SIGN_IN}>
-          <h1>I will be the sign in page</h1>
+          <SignIn />
         </Route>
         <Route path={ROUTES.SIGN_UP}>
-          <h1>I will be the sign up page</h1>
+          <SignUp />
         </Route>
         <Route path={ROUTES.BROWSE}>
-          <h1>I will be the browse page</h1>
+          <Browse />
         </Route>
         <Route path={ROUTES.HOME}>
           <Home />
