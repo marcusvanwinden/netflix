@@ -20,9 +20,12 @@ Profiles.List.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Profiles.User = ({ children }) => <Item>{children}</Item>;
+Profiles.User = ({ children, onClick }) => (
+  <Item onClick={onClick}>{children}</Item>
+);
 Profiles.User.propTypes = {
   children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 Profiles.Picture = ({ src, alt }) => (
