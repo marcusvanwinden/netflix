@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link as ReachRouterLink } from 'react-router-dom';
 import {
@@ -12,7 +12,11 @@ import {
   Feature,
   FeatureCallOut,
   PlayButton,
+  SearchIcon,
+  SearchInput,
+  Search,
 } from './styles/header';
+import SearchImage from '../../../images/icons/search.png';
 
 const Header = ({
   background = true,
@@ -41,6 +45,23 @@ Header.Frame.propTypes = {
 Header.Group = ({ children }) => <Group>{children}</Group>;
 Header.Group.propTypes = {
   children: PropTypes.node.isRequired,
+};
+
+Header.Search = ({ searchTerm, setSearchTerm }) => {
+  const [searchActive, setSearchActive] = useState(false);
+  return (
+    <Search>
+      <SearchIcon onClick={() => setSearchActive(!searchActive)}>
+        <img src={SearchImage} alt="Search" />
+      </SearchIcon>
+      <SearchInput
+        value={searchTerm}
+        onChange={({ target }) => setSearchTerm(target.value)}
+        placeholder="Search films and series"
+        active={searchActive}
+      />
+    </Search>
+  );
 };
 
 Header.Logo = ({ to, src, alt }) => (
