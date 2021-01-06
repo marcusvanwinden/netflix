@@ -13,6 +13,7 @@ export default function BrowseContainer() {
   const [searchTerm, setSearchTerm] = useState('');
 
   const { firebase } = useContext(FirebaseContext);
+  const UserImages = require.context('../../images/users/');
 
   const user = {
     displayName: 'Karl',
@@ -42,7 +43,27 @@ export default function BrowseContainer() {
             <Header.Search
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
-            ></Header.Search>
+            />
+            <Header.Profile>
+              <Header.Picture
+                src={UserImages(`./${user.photoUrl}.png`)}
+                alt="User"
+              />
+              <Header.Dropdown>
+                <Header.Group>
+                  <Header.Picture
+                    src={UserImages(`./${user.photoUrl}.png`)}
+                    alt="User"
+                  />
+                  <Header.Link>{user.displayName}</Header.Link>
+                </Header.Group>
+                <Header.Group>
+                  <Header.Link onClick={() => firebase.auth().signOut()}>
+                    Sign Out
+                  </Header.Link>
+                </Header.Group>
+              </Header.Dropdown>
+            </Header.Profile>
           </Header.Group>
         </Header.Frame>
 

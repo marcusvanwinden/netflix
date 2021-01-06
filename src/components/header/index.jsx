@@ -15,6 +15,9 @@ import {
   SearchIcon,
   SearchInput,
   Search,
+  Profile,
+  Picture,
+  Dropdown,
 } from './styles/header';
 import SearchImage from '../../../images/icons/search.png';
 
@@ -35,6 +38,7 @@ Header.propTypes = {
   children: PropTypes.node.isRequired,
   background: PropTypes.bool.isRequired,
   src: PropTypes.string,
+  dontShowOnSmallViewPort: PropTypes.bool,
 };
 
 Header.Frame = ({ children }) => <Container>{children}</Container>;
@@ -86,9 +90,10 @@ Header.Link = ({ to, active, onClick, children }) => (
   </Link>
 );
 Header.Link.propTypes = {
-  to: PropTypes.string.isRequired,
+  to: PropTypes.string,
   children: PropTypes.node.isRequired,
-  active: PropTypes.string.isRequired,
+  active: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Header.ButtonLink = ({ to, children }) => (
@@ -113,6 +118,22 @@ Header.FeatureCallOut.propTypes = {
 
 Header.PlayButton = ({ children }) => <PlayButton>{children}</PlayButton>;
 Header.PlayButton.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Header.Profile = ({ children }) => <Profile>{children}</Profile>;
+Header.Profile.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Header.Picture = ({ src, alt }) => <Picture src={src} alt={alt} />;
+Header.Picture.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
+Header.Dropdown = ({ children }) => <Dropdown>{children}</Dropdown>;
+Header.Dropdown.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
