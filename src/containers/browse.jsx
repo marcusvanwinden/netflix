@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Fuse from 'fuse.js';
-import { Card, Loading, Header } from '../components';
+import { Card, Loading, Header, Player } from '../components';
 import * as ROUTES from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 import SelectProfileContainer from './profiles';
@@ -144,7 +144,12 @@ export default function BrowseContainer({ slides }) {
                 </Card.Item>
               ))}
             </Card.Entities>
-            <Card.Feature category={category} />
+            <Card.Feature category={category}>
+              <Player>
+                <Player.Button />
+                <Player.Video />
+              </Player>
+            </Card.Feature>
           </Card>
         ))}
       </Card.Group>

@@ -98,7 +98,7 @@ Card.Image.propTypes = {
   alt: PropTypes.string.isRequired,
 };
 
-Card.Feature = ({ category }) => {
+Card.Feature = ({ category, children }) => {
   const { showFeature, setShowFeature, itemFeature } = useContext(
     FeatureContext
   );
@@ -124,6 +124,7 @@ Card.Feature = ({ category }) => {
                 itemFeature.genre.slice(1)}
             </FeatureText>
           </Group>
+          {children}
         </Content>
       </Feature>
     )
@@ -131,6 +132,7 @@ Card.Feature = ({ category }) => {
 };
 Card.Feature.propTypes = {
   category: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Card;
