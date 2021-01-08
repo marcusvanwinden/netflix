@@ -17,15 +17,15 @@ Form.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Form.Base = ({ children, onSubmit, method }) => (
+Form.Base = ({ method, onSubmit, children }) => (
   <Base onSubmit={onSubmit} method={method}>
     {children}
   </Base>
 );
 Form.Base.propTypes = {
-  children: PropTypes.node.isRequired,
-  onSubmit: PropTypes.func.isRequired,
   method: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 Form.Title = ({ children }) => <Title>{children}</Title>;
@@ -43,10 +43,10 @@ Form.TextSmall.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Form.Link = ({ children, to }) => <Link to={to}>{children}</Link>;
+Form.Link = ({ to, children }) => <Link to={to}>{children}</Link>;
 Form.Link.propTypes = {
-  children: PropTypes.node.isRequired,
   to: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 Form.Error = ({ children }) => <Error>{children}</Error>;
@@ -71,15 +71,15 @@ Form.Input.propTypes = {
   autoComplete: PropTypes.string.isRequired,
 };
 
-Form.Submit = ({ children, disabled, type }) => (
+Form.Submit = ({ type, disabled, children }) => (
   <Submit disabled={disabled} type={type}>
     {children}
   </Submit>
 );
 Form.Submit.propTypes = {
-  children: PropTypes.node.isRequired,
-  disabled: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Form;

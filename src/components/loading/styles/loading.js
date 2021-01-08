@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import SpinnerImage from '../../../../images/misc/spinner.png';
+import Images from '../../../context/images';
 
 export const LockBody = createGlobalStyle`
     body {
@@ -25,7 +25,7 @@ export const Spinner = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    background-image: url(${SpinnerImage});
+    background-image: url(${Images('./misc/spinner.png')});
     backgorund-size: contain;
     background-repeat: no-repeat;
     margin-top: -150px;

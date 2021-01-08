@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 import { Link as ReachRouterLink } from 'react-router-dom';
-import HomeBackground from '../../../../images/misc/home-bg.jpg';
-
-const miscImages = require.context('../../../../images/misc/');
+import Images from '../../../context/images';
 
 export const Background = styled.section`
   display: flex;
   flex-direction: column;
   background: url(${({ src }) =>
-      src ? miscImages(`./${src}`) : HomeBackground})
+      src ? Images(`./misc/${src}`) : Images('./misc/home-bg.jpg')})
     top left / cover no-repeat;
 
   @media (max-width: 1100px) {

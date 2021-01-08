@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import chevronRight from '../../../images/icons/chevron-right.png';
+import Images from '../../context/images';
 import { Container, Input, Button, Text, Break } from './styles/opt-form';
 
 const OptForm = ({ children }) => <Container>{children}</Container>;
@@ -16,7 +16,7 @@ OptForm.Input.propTypes = {
 OptForm.Button = ({ children }) => (
   <Button>
     {children}
-    <img src={chevronRight} alt="Try Now" />
+    <img src={Images('./icons/chevron-right.png')} alt="Try Now" />
   </Button>
 );
 OptForm.Button.propTypes = {

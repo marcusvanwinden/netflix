@@ -15,8 +15,7 @@ import {
   Header,
   Body,
 } from './styles/accordion';
-import CloseIcon from '../../../images/icons/close-slim.png';
-import OpenIcon from '../../../images/icons/add.png';
+import Images from '../../context/images';
 
 const ToggleContext = createContext();
 
@@ -57,9 +56,9 @@ Accordion.Header = ({ children }) => {
     <Header onClick={() => setToggleShow(!toggleShow)}>
       {children}
       {toggleShow ? (
-        <img src={CloseIcon} alt="Close" />
+        <img src={Images('./icons/close-slim.png')} alt="Close" />
       ) : (
-        <img src={OpenIcon} alt="Open" />
+        <img src={Images('./icons/add.png')} alt="Open" />
       )}
     </Header>
   );

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Jumbotron } from '../components';
 import jumboData from '../fixtures/jumbotrons.json';
-
-const jumboImages = require.context('../../images/jumbotrons/');
+import Images from '../context/images';
 
 export default function JumbotronContainer() {
   return (
@@ -15,7 +14,7 @@ export default function JumbotronContainer() {
           </Jumbotron.Pane>
           <Jumbotron.Pane>
             <Jumbotron.Image
-              src={jumboImages(`./${jumbo.image}`)}
+              src={Images(`./jumbotrons/${jumbo.image}`)}
               alt={jumbo.alt}
             />
           </Jumbotron.Pane>

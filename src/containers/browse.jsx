@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Card, Loading, Header } from '../components';
 import * as ROUTES from '../constants/routes';
 import FirebaseContext from '../context/firebase';
 import SelectProfileContainer from './profiles';
 import FooterContainer from './footer';
-import Logo from '../../images/misc/logo.svg';
-
-const UserImages = require.context('../../images/users/');
-const AllImages = require.context('../../images/');
+import Images from '../context/images';
 
 export default function BrowseContainer({ slides }) {
   const [category, setCategory] = useState('series');
@@ -19,7 +17,7 @@ export default function BrowseContainer({ slides }) {
   const { firebase } = useContext(FirebaseContext);
 
   const user = {
-    displayName: 'Karl',
+    displayName: 'Marcus',
     photoUrl: '1',
   };
 
@@ -35,18 +33,18 @@ export default function BrowseContainer({ slides }) {
 
   function toSeries() {
     setCategory('series');
-    setSlideRows(slides['series']);
+    setSlideRows(slides.series);
   }
 
   function toFilms() {
     setCategory('films');
-    setSlideRows(slides['films']);
+    setSlideRows(slides.films);
   }
 
   return profile.displayName ? (
     <>
       {loading ? (
-        <Loading src={UserImages(`./${user.photoUrl}.png`)} />
+        <Loading src={Images(`./users/${user.photoUrl}.png`)} />
       ) : (
         <Loading.ReleaseBody />
       )}
@@ -54,7 +52,11 @@ export default function BrowseContainer({ slides }) {
       <Header src="joker1.jpg" dontShowOnSmallViewPort>
         <Header.Frame>
           <Header.Group>
-            <Header.Logo to={ROUTES.HOME} src={Logo} alt="Netflix" />
+            <Header.Logo
+              to={ROUTES.HOME}
+              src={Images('./misc/logo.svg')}
+              alt="Netflix"
+            />
             <Header.Link
               active={category === 'series' ? 'true' : 'false'}
               onClick={toSeries}
@@ -75,14 +77,14 @@ export default function BrowseContainer({ slides }) {
             />
             <Header.Profile>
               <Header.Picture
-                src={UserImages(`./${user.photoUrl}.png`)}
-                alt="User"
+                src={Images(`./users/${user.photoUrl}.png`)}
+                alt={user.displayName}
               />
               <Header.Dropdown>
                 <Header.Group>
                   <Header.Picture
-                    src={UserImages(`./${user.photoUrl}.png`)}
-                    alt="User"
+                    src={Images(`./users/${user.photoUrl}.png`)}
+                    alt={user.displayName}
                   />
                   <Header.Link>{user.displayName}</Header.Link>
                 </Header.Group>
@@ -117,10 +119,10 @@ export default function BrowseContainer({ slides }) {
               {slideItem.data.map((item) => (
                 <Card.Item key={item.docId} item={item}>
                   <Card.Image
-                    // src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
-                    src={AllImages(
+                    src={Images(
                       `./${category}/${item.genre}/${item.slug}/small.jpg`
                     )}
+                    alt={item.title}
                   />
                   <Card.Meta>
                     <Card.SubTitle>{item.title}</Card.SubTitle>
@@ -129,6 +131,7 @@ export default function BrowseContainer({ slides }) {
                 </Card.Item>
               ))}
             </Card.Entities>
+            <Card.Feature category={category} />
           </Card>
         ))}
       </Card.Group>
@@ -138,3 +141,39 @@ export default function BrowseContainer({ slides }) {
     <SelectProfileContainer user={user} setProfile={setProfile} />
   );
 }
+BrowseContainer.propTypes = {
+  slides: PropTypes.shape({
+    series: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        data: PropTypes.arrayOf(
+          PropTypes.shape({
+            description: PropTypes.string.isRequired,
+            docId: PropTypes.string.isRequired,
+            genre: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+            maturity: PropTypes.string.isRequired,
+            slug: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+          })
+        ),
+      })
+    ).isRequired,
+    films: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        data: PropTypes.arrayOf(
+          PropTypes.shape({
+            description: PropTypes.string.isRequired,
+            docId: PropTypes.string.isRequired,
+            genre: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+            maturity: PropTypes.string.isRequired,
+            slug: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+          })
+        ),
+      })
+    ).isRequired,
+  }).isRequired,
+};

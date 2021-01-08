@@ -1,15 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Images from '../context/images';
 import { Header, Profiles } from '../components';
 import * as ROUTES from '../constants/routes';
-import Logo from '../../images/misc/logo.svg';
 
 export default function SelectProfileContainer({ user, setProfile }) {
   return (
     <>
       <Header background={false}>
         <Header.Frame>
-          <Header.Logo to={ROUTES.HOME} src={Logo} alt="Netflix" />
+          <Header.Logo
+            to={ROUTES.HOME}
+            src={Images('./misc/logo.svg')}
+            alt="Netflix"
+          />
         </Header.Frame>
       </Header>
       <Profiles>
@@ -23,7 +27,7 @@ export default function SelectProfileContainer({ user, setProfile }) {
               })
             }
           >
-            <Profiles.Picture src={user.photoUrl} alt="Profile picture" />
+            <Profiles.Picture src={user.photoUrl} alt={user.displayName} />
             <Profiles.Name>{user.displayName}</Profiles.Name>
           </Profiles.User>
         </Profiles.List>
@@ -33,8 +37,8 @@ export default function SelectProfileContainer({ user, setProfile }) {
 }
 SelectProfileContainer.propTypes = {
   user: PropTypes.shape({
-    displayName: PropTypes.string,
-    photoUrl: PropTypes.string,
+    displayName: PropTypes.string.isRequired,
+    photoUrl: PropTypes.string.isRequired,
   }).isRequired,
   setProfile: PropTypes.func.isRequired,
 };

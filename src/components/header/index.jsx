@@ -19,7 +19,7 @@ import {
   Picture,
   Dropdown,
 } from './styles/header';
-import SearchImage from '../../../images/icons/search.png';
+import Images from '../../context/images';
 
 const Header = ({
   background = true,
@@ -35,10 +35,10 @@ const Header = ({
     children
   );
 Header.propTypes = {
-  children: PropTypes.node.isRequired,
-  background: PropTypes.bool.isRequired,
+  background: PropTypes.bool,
   src: PropTypes.string,
   dontShowOnSmallViewPort: PropTypes.bool,
+  children: PropTypes.node.isRequired,
 };
 
 Header.Frame = ({ children }) => <Container>{children}</Container>;
@@ -56,7 +56,7 @@ Header.Search = ({ searchTerm, setSearchTerm }) => {
   return (
     <Search>
       <SearchIcon onClick={() => setSearchActive(!searchActive)}>
-        <img src={SearchImage} alt="Search" />
+        <img src={Images('./icons/search.png')} alt="Search" />
       </SearchIcon>
       <SearchInput
         value={searchTerm}
@@ -66,6 +66,10 @@ Header.Search = ({ searchTerm, setSearchTerm }) => {
       />
     </Search>
   );
+};
+Header.Search.propTypes = {
+  searchTerm: PropTypes.string.isRequired,
+  setSearchTerm: PropTypes.func.isRequired,
 };
 
 Header.Logo = ({ to, src, alt }) => (
@@ -91,9 +95,9 @@ Header.Link = ({ to, active, onClick, children }) => (
 );
 Header.Link.propTypes = {
   to: PropTypes.string,
-  children: PropTypes.node.isRequired,
   active: PropTypes.string,
   onClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
 };
 
 Header.ButtonLink = ({ to, children }) => (

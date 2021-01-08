@@ -10,56 +10,40 @@ import {
   Pane,
 } from './styles/jumbotron';
 
-export default function Jumbotron({ children, direction = 'row' }) {
-  return (
-    <Item>
-      <Inner direction={direction}>{children}</Inner>
-    </Item>
-  );
-}
-
+const Jumbotron = ({ direction = 'row', children }) => (
+  <Item>
+    <Inner direction={direction}>{children}</Inner>
+  </Item>
+);
 Jumbotron.propTypes = {
-  children: PropTypes.node.isRequired,
   direction: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
-Jumbotron.Container = function JumbotronContainer({ children }) {
-  return <Container>{children}</Container>;
-};
-
+Jumbotron.Container = ({ children }) => <Container>{children}</Container>;
 Jumbotron.Container.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Jumbotron.Title = function JumbotronTitle({ children }) {
-  return <Title>{children}</Title>;
-};
-
+Jumbotron.Title = ({ children }) => <Title>{children}</Title>;
 Jumbotron.Title.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Jumbotron.SubTitle = function JumbotronSubTitle({ children }) {
-  return <SubTitle>{children}</SubTitle>;
-};
-
+Jumbotron.SubTitle = ({ children }) => <SubTitle>{children}</SubTitle>;
 Jumbotron.SubTitle.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Jumbotron.Image = function JumbotronImage({ src, alt }) {
-  return <Image src={src} alt={alt} />;
-};
-
+Jumbotron.Image = ({ src, alt }) => <Image src={src} alt={alt} />;
 Jumbotron.Image.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
 };
 
-Jumbotron.Pane = function JumbotronPane({ children }) {
-  return <Pane>{children}</Pane>;
-};
-
+Jumbotron.Pane = ({ children }) => <Pane>{children}</Pane>;
 Jumbotron.Pane.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+export default Jumbotron;

@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import loadingIcon from '../../../images/misc/loading.gif';
+import Images from '../../context/images';
 import { Container, Title, List, Item, Picture, Name } from './styles/profiles';
-
-const userImgs = require.context('../../../images/users');
 
 const Profiles = ({ children }) => <Container>{children}</Container>;
 Profiles.propTypes = {
@@ -20,16 +18,19 @@ Profiles.List.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Profiles.User = ({ children, onClick }) => (
+Profiles.User = ({ onClick, children }) => (
   <Item onClick={onClick}>{children}</Item>
 );
 Profiles.User.propTypes = {
-  children: PropTypes.node.isRequired,
   onClick: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 Profiles.Picture = ({ src, alt }) => (
-  <Picture src={src ? userImgs(`./${src}.png`) : { loadingIcon }} alt={alt} />
+  <Picture
+    src={src ? Images(`./users/${src}.png`) : Images('./misc/loading.gif')}
+    alt={alt}
+  />
 );
 Profiles.Picture.propTypes = {
   src: PropTypes.string.isRequired,
