@@ -1,19 +1,22 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Card, Loading, Header } from '../components';
+import * as ROUTES from '../constants/routes';
+import FirebaseContext from '../context/firebase';
 import SelectProfileContainer from './profiles';
 import FooterContainer from './footer';
-import * as ROUTES from '../constants/routes';
 import Logo from '../../images/misc/logo.svg';
-import { Loading, Header } from '../components';
-import FirebaseContext from '../context/firebase';
 
-export default function BrowseContainer() {
+const UserImages = require.context('../../images/users/');
+const AllImages = require.context('../../images/');
+
+export default function BrowseContainer({ slides }) {
   const [category, setCategory] = useState('series');
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [slideRows, setSlideRows] = useState([]);
 
   const { firebase } = useContext(FirebaseContext);
-  const UserImages = require.context('../../images/users/');
 
   const user = {
     displayName: 'Karl',
@@ -26,6 +29,20 @@ export default function BrowseContainer() {
     }, 3000);
   }, [user]);
 
+  useEffect(() => {
+    setSlideRows(slides[category]);
+  }, [slides, category]);
+
+  function toSeries() {
+    setCategory('series');
+    setSlideRows(slides['series']);
+  }
+
+  function toFilms() {
+    setCategory('films');
+    setSlideRows(slides['films']);
+  }
+
   return profile.displayName ? (
     <>
       {loading ? (
@@ -33,19 +50,20 @@ export default function BrowseContainer() {
       ) : (
         <Loading.ReleaseBody />
       )}
-      <Header background src="joker1.jpg" dontShowOnSmallViewPort>
+
+      <Header src="joker1.jpg" dontShowOnSmallViewPort>
         <Header.Frame>
           <Header.Group>
             <Header.Logo to={ROUTES.HOME} src={Logo} alt="Netflix" />
             <Header.Link
               active={category === 'series' ? 'true' : 'false'}
-              onClick={() => setCategory('series')}
+              onClick={toSeries}
             >
               Series
             </Header.Link>
             <Header.Link
               active={category === 'films' ? 'true' : 'false'}
-              onClick={() => setCategory('films')}
+              onClick={toFilms}
             >
               Films
             </Header.Link>
@@ -70,7 +88,7 @@ export default function BrowseContainer() {
                 </Header.Group>
                 <Header.Group>
                   <Header.Link onClick={() => firebase.auth().signOut()}>
-                    Sign Out
+                    Sign out
                   </Header.Link>
                 </Header.Group>
               </Header.Dropdown>
@@ -90,6 +108,30 @@ export default function BrowseContainer() {
           <Header.PlayButton>Play</Header.PlayButton>
         </Header.Feature>
       </Header>
+
+      <Card.Group>
+        {slideRows.map((slideItem) => (
+          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+            <Card.Title>{slideItem.title}</Card.Title>
+            <Card.Entities>
+              {slideItem.data.map((item) => (
+                <Card.Item key={item.docId} item={item}>
+                  <Card.Image
+                    // src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                    src={AllImages(
+                      `./${category}/${item.genre}/${item.slug}/small.jpg`
+                    )}
+                  />
+                  <Card.Meta>
+                    <Card.SubTitle>{item.title}</Card.SubTitle>
+                    <Card.Text>{item.description}</Card.Text>
+                  </Card.Meta>
+                </Card.Item>
+              ))}
+            </Card.Entities>
+          </Card>
+        ))}
+      </Card.Group>
       <FooterContainer />
     </>
   ) : (
