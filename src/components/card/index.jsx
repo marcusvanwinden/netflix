@@ -1,6 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
 import PropTypes from 'prop-types';
-import CloseButton from '../../../images/icons/close.png';
 import {
   Container,
   Group,
@@ -10,13 +9,15 @@ import {
   Feature,
   FeatureTitle,
   FeatureClose,
+  FeatureText,
   Maturity,
-  Context,
+  Content,
   Meta,
   Entities,
   Item,
   Image,
 } from './styles/card';
+import Images from '../../context/images';
 
 const FeatureContext = createContext();
 
@@ -31,50 +32,41 @@ const Card = ({ children }) => {
     </FeatureContext.Provider>
   );
 };
-
-Card.Group = ({ children }) => {
-  return <Group>{children}</Group>;
+Card.propTypes = {
+  children: PropTypes.node.isRequired,
 };
+
+Card.Group = ({ children }) => <Group>{children}</Group>;
 Card.Group.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Card.Title = ({ children }) => {
-  return <Title>{children}</Title>;
-};
+Card.Title = ({ children }) => <Title>{children}</Title>;
 Card.Title.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Card.SubTitle = ({ children }) => {
-  return <SubTitle>{children}</SubTitle>;
-};
+Card.SubTitle = ({ children }) => <SubTitle>{children}</SubTitle>;
 Card.SubTitle.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Card.Text = ({ children }) => {
-  return <Text>{children}</Text>;
-};
+Card.Text = ({ children }) => <Text>{children}</Text>;
 Card.Text.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Card.Entities = ({ children }) => {
-  return <Entities>{children}</Entities>;
-};
+Card.Entities = ({ children }) => <Entities>{children}</Entities>;
 Card.Entities.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Card.Meta = ({ children }) => {
-  return <Meta>{children}</Meta>;
-};
+Card.Meta = ({ children }) => <Meta>{children}</Meta>;
 Card.Meta.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-Card.Item = ({ children, item }) => {
+Card.Item = ({ item, children }) => {
   const { setShowFeature, setItemFeature } = useContext(FeatureContext);
   return (
     <Item
@@ -83,43 +75,62 @@ Card.Item = ({ children, item }) => {
         setShowFeature(true);
       }}
     >
-      {' '}
       {children}
     </Item>
   );
 };
-
-Card.Image = ({ src }) => {
-  return <Image src={src} />;
+Card.Item.propTypes = {
+  item: PropTypes.shape({
+    description: PropTypes.string.isRequired,
+    docId: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    maturity: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
-Card.Feature = ({ children, category }) => {
-  const { showFeature, itemFeature, setShowFeature } = useContext(
+Card.Image = ({ src, alt }) => <Image src={src} alt={alt} />;
+Card.Image.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
+Card.Feature = ({ category }) => {
+  const { showFeature, setShowFeature, itemFeature } = useContext(
     FeatureContext
   );
-  return showFeature ? (
-    <Feature
-      src={`/images/${category}/${itemFeature.genre}/${itemFeature.slug}/large.jpg`}
-    >
-      <Content>
-        <FeatureTitle>{itemFeature.title}</FeatureTitle>
-        <FeatureText>{itemFeature.description}</FeatureText>
-        <FeatureCloses onClick={() => setShowFeature(false)}>
-          <img src={CloseButton} alt="Close" />
-        </FeatureCloses>
-
-        <Group margin="30px 0" flexDirection="row" alignItems="center">
-          <Maturity rating={itemFeature.maturity}>
-            {itemFeature < 12 ? 'PG' : itemFeature.maturity}
-          </Maturity>
-          <FeatureText fontWeight="bold">
-            {itemFeature.genre.charAt(0).toUpperCase() +
-              itemFeature.genre.slice(1)}
-          </FeatureText>
-        </Group>
-      </Content>
-    </Feature>
-  ) : null;
+  return (
+    showFeature && (
+      <Feature
+        src={Images(
+          `./${category}/${itemFeature.genre}/${itemFeature.slug}/large.jpg`
+        )}
+      >
+        <Content>
+          <FeatureTitle>{itemFeature.title}</FeatureTitle>
+          <FeatureText>{itemFeature.description}</FeatureText>
+          <FeatureClose onClick={() => setShowFeature(false)}>
+            <img src={Images('./icons/close.png')} alt="Close" />
+          </FeatureClose>
+          <Group margin="30px 0" flexDirection="row" alignItems="center">
+            <Maturity rating={itemFeature.maturity}>
+              {itemFeature < 12 ? 'PG' : itemFeature.maturity}
+            </Maturity>
+            <FeatureText fontWeight="bold">
+              {itemFeature.genre.charAt(0).toUpperCase() +
+                itemFeature.genre.slice(1)}
+            </FeatureText>
+          </Group>
+        </Content>
+      </Feature>
+    )
+  );
+};
+Card.Feature.propTypes = {
+  category: PropTypes.string.isRequired,
 };
 
 export default Card;
