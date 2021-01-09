@@ -11,6 +11,7 @@
   <li>Firebase (Storage + Authentication)</li>
   <li>Babel</li>
   <li>Fuse.js</li>
+  <li>Node</li>
 </ul>
 
 <h2>Run Locally</h2>
