@@ -28,12 +28,13 @@ export default function SignUp() {
         })
       )
       .then(() => {
-        setEmailAddress('');
-        setPassword('');
-        setError('');
         history.push(ROUTES.HOME);
       })
-      .catch((err) => setError(err.message));
+      .catch((err) => {
+        setEmailAddress('');
+        setPassword('');
+        setError(err.message);
+      });
   }
 
   return (
